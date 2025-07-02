@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalConnect - Login</title>
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>Web Portal Lawyers</h1>
+            <p>Your trusted legal services platform</p>
+        </div>
+
+        <div class="login-tabs">
+            <button class="tab-button active" onclick="switchTab('user')">
+                Client Login
+            </button>
+            <button class="tab-button" onclick="switchTab('lawyer')">
+                Lawyer Login
+            </button>
+        </div>
+
+        <div id="user-tab" class="tab-content active">
+            <form id="userLoginForm">
+                <div class="form-group">
+                    <label for="userEmail">Email Address</label>
+                    <input type="email" id="userEmail" name="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userPassword">Password</label>
+                    <input type="password" id="userPassword" name="password" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#" onclick="forgotPassword('user')">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="login-button">Sign In as Client</button>
+            </form>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <div class="signup-link">
+                Don't have an account? <a href="#" onclick="showSignup('user')">Sign up as Client</a>
+            </div>
+        </div>
+
+        <div id="lawyer-tab" class="tab-content">
+            <form id="lawyerLoginForm">
+                <div class="form-group">
+                    <label for="lawyerEmail">Professional Email</label>
+                    <input type="email" id="lawyerEmail" name="email" placeholder="Enter your professional email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lawyerPassword">Password</label>
+                    <input type="password" id="lawyerPassword" name="password" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="barNumber">Bar Registration Number</label>
+                    <input type="text" id="barNumber" name="barNumber" placeholder="Enter your bar number" required>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#" onclick="forgotPassword('lawyer')">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="login-button">Sign In as Lawyer</button>
+            </form>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <div class="signup-link">
+                New lawyer? <a href="#" onclick="showSignup('lawyer')">Register Your Practice</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/login.js"></script>
+</body>
+</html>

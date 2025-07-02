@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us </title>
+    <link rel="stylesheet" href="styles/contact.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1729865508/logo_smcgej.jpg" alt="LOGO" class="logo">
+        </div>
+        <div class="navbar-right">
+            <a href="main.html" class="a-element">Home</a>
+            <a href="profiles.html" class="a-element">Attorney</a>
+            <a href="contact.html" class="a-element">Contact</a>
+            <a href="about.html" class="a-element">About</a>
+            <button class="LOGIN"><a href="login.html">LOGIN</a></button>
+            <li class="dropdown">
+                <a href="Signup.html" class="signin-btn">SIGNIN</a>
+                <!-- <div class="dropdown-content">
+                    <a href="client.html">Client</a>
+                    <a href="attorneySignin.html">Lawyer</a>
+                </div> -->
+            </li>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p style="text-align: center;">We’re here to assist you. Whether you have questions about our platform, need technical support, or want to collaborate, feel free to get in touch with us through the options below.</p>
+
+        <div class="contact-section">
+            <h2>Get in Touch</h2>
+            <p><strong>Phone:</strong> <a href="tel:18005294357">1-800-LAW-HELP</a></p>
+            <p><strong>Email:</strong> <a href="mailto:info@lawportal.com">info@lawportal.com</a></p>
+            <p><strong>Support:</strong> <a href="mailto:support@lawportal.com">support@lawportal.com</a></p>
+            <p><strong>Office Address:</strong>Law Portal Inc., 456 Legal Heights, Madhapur, Hyderabad, Telangana, 500081</p>
+        </div>
+
+        <div class="contact-section">
+            <h2>Contact Form</h2>
+            <form action="/submit-contact" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="tel" name="phone" placeholder="Your Phone" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="contact-section">
+            <h2>Follow Us</h2>
+            <div class="social-links">
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">Twitter</a>
+                <a href="#" target="_blank">Facebook</a>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <p>For common questions, visit our <a href="#">FAQ section</a>.</p>
+        </div>
+    </div>
+</body>

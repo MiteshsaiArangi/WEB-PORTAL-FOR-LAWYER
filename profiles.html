@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profiles</title>
+  <link rel="stylesheet" href="styles/profile.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-left">
+        <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1729865508/logo_smcgej.jpg" alt="LOGO" class="logo">
+    </div>
+    <div class="navbar-right">
+        <a href="main.html" class="a-element">Home</a>
+        <a href="#" class="a-element">Attorney</a>
+        <a href="contact.html" class="a-element">Contact</a>
+        <a href="about.html" class="a-element">About</a>
+        <button class="LOGIN"><a href="login.html">LOGIN</a></button>
+        <li class="dropdown">
+            <a href="Signup.html" class="signin-btn">SIGNIN</a>
+            <!-- <div class="dropdown-content">
+                <a href="client.html">Client</a>
+                <a href="attorneySignin.html">Lawyer</a>
+            </div> -->
+        </li>
+    </div>
+</div>
+  <div class="container" id="profile-grid">
+    <div class="profile-card" onclick="showProfile('arjun')">
+      <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1733577417/concerned-mature-indian-businessman-at-office-desk-with-laptop-computer_fyr0jm.jpg" alt="John Doe">
+      <h3>Arjun Mehta</h3>
+    </div>
+    <div class="profile-card" onclick="showProfile('priya')">
+      <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1733577302/business-woman-portrait-and-lawyer-at-a-law-firm-feeling-proud-of-corporate-vision-happiness_meiasa.jpg" alt="Jane Smith">
+      <h3>Priya Sharma</h3>
+    </div>
+    <div class="profile-card" onclick="showProfile('sneha')">
+      <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1733577211/portrait-of-female-asian-lawyer-manager-in-formal-suit-working-with-signed-insurance-contract_di8ybi.jpg" alt="Alice Brown">
+      <h3>Sneha Iyer</h3>
+    </div>
+    <div class="profile-card" onclick="showProfile('rajesh')">
+      <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1733576792/portrait-lawyer-and-arms-crossed-with-smile-man-in-office-for-legal-advice-at-law-firm_zngxsy.jpg" alt="Alice Brown">
+      <h3> Rajesh Gupta</h3>
+    </div>
+    <div class="profile-card" onclick="showProfile('rohit')">
+      <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1733576752/portrait-of-attractive-elegant-confident-arabian-or-indian-successful-businessman_et829m.jpg" alt="Alice Brown">
+      <h3>Rohit Khanna</h3>
+    </div>
+    <div class="profile-card" onclick="showProfile('anjali')">
+      <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1733753478/portrait-lawyer-and-black-woman-with-tablet-smile-and-happy-in-office-workplace-african_ocig5c.jpg" alt="Alice Brown">
+      <h3>Anjali Menon</h3>
+    </div>
+  </div>
+
+  <!-- Profile Details Section (Hidden by Default) -->
+  <div class="profile-details" id="profile-details" style="display: none;">
+    <button onclick="backToGrid()" class="back-button">← Back to Profiles</button>
+    <img id="profile-img" src="" alt="Profile Image">
+    <h1 id="profile-name"></h1>
+    <p id="profile-position"></p>
+    <p id="profile-about"></p>
+    <h4>Education</h4>
+  <p id="profile-education"></p>
+  <h4>Skills</h4>
+  <ul id="profile-skills"></ul>
+    <button class="button">Appointment</button>
+  </div>
+
+  <script>
+    // Data for Profiles
+    const profiles = {
+      arjun: {
+        name: "Arjun Mehta",
+        img: "https://res.cloudinary.com/dzeal21vu/image/upload/v1733577417/concerned-mature-indian-businessman-at-office-desk-with-laptop-computer_fyr0jm.jpg",
+        position: "Criminal Defense and Litigation",
+        about: "Arjun Mehta is a seasoned criminal lawyer with a robust practice in Delhi’s courts, including the Supreme Court of India and the Delhi High Court. With 15 years of experience, he has handled a wide range of cases, including white-collar crimes, criminal defamation, and offenses under the Indian Penal Code. Arjun is known for his persuasive advocacy and commitment to justice.",
+        education: "LL.B., Faculty of Law, University of Delhi  Bachelor of Arts, Political Science, University of Delhi",
+        skills:['Trial advocacy and cross-examination','Bail applications and anticipatory bail','White-collar crime litigation']
+      },
+      priya: {
+        name: "Priya Sharma",
+        img: "https://res.cloudinary.com/dzeal21vu/image/upload/v1733577302/business-woman-portrait-and-lawyer-at-a-law-firm-feeling-proud-of-corporate-vision-happiness_meiasa.jpg",
+        position: "Corporate and Commercial Law",
+        about: "Priya Sharma is a highly accomplished corporate lawyer based in Mumbai, with over 12 years of experience in advising Indian and multinational companies. She specializes in mergers and acquisitions, joint ventures, and regulatory compliance under Indian corporate laws, including the Companies Act, 2013. Priya has a deep understanding of cross-border transactions and has represented clients in industries like fintech, pharmaceuticals, and real estate.",
+        education: "LL.B., National Law School of India University, Bangalore  Bachelor of Commerce, St. Xavier's College, Mumbai",
+        skills:['Drafting and vetting commercial contracts','Regulatory compliance under SEBI and RBI guidelines','Advising on corporate restructuring and M&A']
+      },
+      sneha: {
+        name: "Sneha Iyer",
+        img: "https://res.cloudinary.com/dzeal21vu/image/upload/v1733577211/portrait-of-female-asian-lawyer-manager-in-formal-suit-working-with-signed-insurance-contract_di8ybi.jpg",
+        position: " Family Law",
+        about: "Sneha Iyer is a family law expert based in Chennai with over 10 years of experience in handling divorce, child custody, and domestic violence cases. She has a reputation for her empathetic approach to sensitive family matters and her ability to mediate amicable resolutions while ensuring her clients' rights are protected. Sneha also provides legal assistance in drafting wills and estate planning.",
+        education: "LL.B., Tamil Nadu Dr. Ambedkar Law University, Chennai   Bachelor of Arts in Sociology, Loyola College, Chennai",
+        skills: ['Mediation and counseling for family disputes','Filing cases under the Hindu Marriage Act and PWDV Act','Drafting wills and property settlements']
+      },
+      rajesh: {
+        name: "Rajesh Gupta",
+        img: "https://res.cloudinary.com/dzeal21vu/image/upload/v1733576792/portrait-lawyer-and-arms-crossed-with-smile-man-in-office-for-legal-advice-at-law-firm_zngxsy.jpg",
+        position: " Intellectual Property Rights (IPR)",
+        about: "Rajesh Gupta is a leading intellectual property lawyer based in Bengaluru, with over 8 years of experience in protecting trademarks, copyrights, and patents for startups and established businesses. He has represented clients in several landmark cases before the Intellectual Property Appellate Board (IPAB). Rajesh also provides legal services related to technology transfers and licensing agreements.",
+        education: "LL.B., National University of Advanced Legal Studies (NUALS), Kochi   Bachelor of Engineering, Computer Science, Manipal Institute of Technology",
+        skills:['Trademark and patent registration in India','IP enforcement and litigation','Drafting IP licensing agreements']
+      },
+      rohit: {
+        name: "Rohit Khanna",
+        img: "https://res.cloudinary.com/dzeal21vu/image/upload/v1733576752/portrait-of-attractive-elegant-confident-arabian-or-indian-successful-businessman_et829m.jpg",
+        position: "Constitutional and Administrative Law",
+        about: "Adv. Rohit Khanna is a distinguished lawyer based in New Delhi, with over 18 years of experience in handling high-profile constitutional and administrative law cases. Known for his expertise in public interest litigation (PILs), he has represented clients before the Supreme Court of India and various High Courts. Rohit has been instrumental in challenging unconstitutional legislation and advocating for citizens' fundamental rights.",
+        education: "LL.B., National Law University, Delhi  Master’s in Constitutional Law, Jawaharlal Nehru University (JNU), Delhi",
+        skills: ['Drafting and filing PILs','Litigation under the Indian Constitution (Article 32 and 226)','Administrative law disputes and policy analysis']
+      },
+      anjali: {
+        name: "Anjali Menon",
+        img: "https://res.cloudinary.com/dzeal21vu/image/upload/v1733753478/portrait-lawyer-and-black-woman-with-tablet-smile-and-happy-in-office-workplace-african_ocig5c.jpg",
+        position: " Environmental and Public Interest Law",
+        about: "Anjali Menon is a dedicated environmental lawyer based in Kochi, known for her work in environmental litigation and advisory services under the Environment Protection Act, 1986. She has filed and argued several PILs concerning pollution, wildlife protection, and illegal construction activities. Anjali is passionate about sustainable development and environmental justice.",
+        education: "LL.B., Symbiosis Law School, Pune   Master’s in Environmental Law, TERI University, New Delhi",
+        skills:['Filing PILs and environmental impact assessments (EIA)','Advising on compliance with Indian environmental laws','Litigation under the Wildlife Protection Act, 1972']
+      },
+      
+    };
+
+    // Show Profile Details
+    function showProfile(profileKey) {
+      const profile = profiles[profileKey];
+      if (profile) {
+        // Populate the profile details section
+        document.getElementById('profile-img').src = profile.img;
+        document.getElementById('profile-name').textContent = profile.name;
+        document.getElementById('profile-position').textContent = profile.position;
+        document.getElementById('profile-about').textContent = profile.about;
+        document.getElementById('profile-education').innerHTML = profile.education || 'Education details not available.';
+      document.getElementById('profile-skills').innerHTML = profile.skills 
+        ? profile.skills.map(skill => `<li>${skill}</li>`).join('') 
+        : 'Skills not available.';
+
+        // Hide the grid and show the details section
+        document.getElementById('profile-grid').style.display = 'none';
+        document.getElementById('profile-details').style.display = 'block';
+      }
+    }
+
+    // Back to Grid View
+    function backToGrid() {
+      document.getElementById('profile-details').style.display = 'none';
+      document.getElementById('profile-grid').style.display = 'grid';
+    }
+  </script>
+</body>
+</html>

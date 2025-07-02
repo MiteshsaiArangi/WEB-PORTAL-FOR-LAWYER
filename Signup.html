@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Portal - Sign Up</title>
+    <link rel="stylesheet" href="styles/signup.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Signup Selection Page -->
+        <div id="signup-selection" class="page active">
+            <div class="header">
+                <h1>Web Portal for Lawyers</h1>
+                <p>Choose your account type to get started</p>
+            </div>
+            <div class="content">
+                <div class="signup-options">
+                    <button class="option-btn" onclick="showSignupForm('lawyer')">
+                        <span class="icon"></span>
+                        Sign Up as Lawyer
+                        <div class="option-description">
+                            Create your professional profile
+                        </div>
+                    </button>
+                    <button class="option-btn" onclick="showSignupForm('user')">
+                        <span class="icon"></span>
+                        Sign Up as User
+                        <div class="option-description">
+                            Find and connect with lawyers
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lawyer Signup Form -->
+        <div id="lawyer-signup" class="page">
+            <div class="header">
+                <h1> Lawyer Registration</h1>
+                <p>Create your professional profile</p>
+            </div>
+            <div class="content">
+                <form id="lawyer-form">
+                    <div class="form-group">
+                        <label for="lawyer-name">Full Name *</label>
+                        <input type="text" id="lawyer-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lawyer-email">Email Address *</label>
+                        <input type="email" id="lawyer-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lawyer-password">Password *</label>
+                        <input type="password" id="lawyer-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lawyer-phone">Phone Number *</label>
+                        <input type="tel" id="lawyer-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lawyer-license">Bar License Number *</label>
+                        <input type="text" id="lawyer-license" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lawyer-specialization">Specialization *</label>
+                        <select id="lawyer-specialization" required>
+                            <option value="">Select specialization</option>
+                            <option value="criminal">Criminal Law</option>
+                            <option value="civil">Civil Law</option>
+                            <option value="corporate">Corporate Law</option>
+                            <option value="family">Family Law</option>
+                            <option value="tax">Tax Law</option>
+                            <option value="property">Property Law</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="lawyer-experience">Years of Experience *</label>
+                        <input type="number" id="lawyer-experience" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lawyer-firm">Law Firm/Practice Name</label>
+                        <input type="text" id="lawyer-firm">
+                    </div>
+                    <div class="form-group">
+                        <label for="lawyer-address">Office Address</label>
+                        <textarea id="lawyer-address" placeholder="Enter your office address"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="lawyer-bio">Professional Bio</label>
+                        <textarea id="lawyer-bio" placeholder="Brief description of your practice and expertise"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Create Lawyer Account</button>
+                    <button type="button" class="btn btn-secondary" onclick="showPage('signup-selection')">Back</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- User Signup Form -->
+        <div id="user-signup" class="page">
+            <div class="header">
+                <h1>User Registration</h1>
+                <p>Join our legal community</p>
+            </div>
+            <div class="content">
+                <form id="user-form">
+                    <div class="form-group">
+                        <label for="user-name">Full Name *</label>
+                        <input type="text" id="user-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email">Email Address *</label>
+                        <input type="email" id="user-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password">Password *</label>
+                        <input type="password" id="user-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-phone">Phone Number</label>
+                        <input type="tel" id="user-phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-location">Location</label>
+                        <input type="text" id="user-location" placeholder="City, State">
+                    </div>
+                    <button type="submit" class="btn">Create User Account</button>
+                    <button type="button" class="btn btn-secondary" onclick="showPage('signup-selection')">Back</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lawyers Page (Hidden initially) -->
+    <div id="lawyers-page" class="lawyers-page" style="display: none;">
+        <div class="page-header">
+            <h1>👨‍💼 Lawyers Directory</h1>
+            <p>Professional legal experts in our network</p>
+        </div>
+        <div id="lawyers-list">
+            <!-- Lawyer profiles will be displayed here -->
+        </div>
+        <button class="btn back-btn" onclick="goToSignup()">
+            Back to Signup
+        </button>
+    </div>
+
+    <!-- Home Page (Hidden initially) -->
+    <div id="home-page" class="home-page" style="display: none;">
+        <div class="page-header">
+            <h1>🏠 Welcome to Legal Portal</h1>
+            <p>Your gateway to legal services and expert consultation</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🔍 Find Lawyers</h3>
+                <p>Search and connect with qualified legal professionals in your area.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💬 Consultation</h3>
+                <p>Book appointments and get expert legal advice for your cases.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📋 Legal Resources</h3>
+                <p>Access legal documents, guides, and helpful resources.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚖️ Case Management</h3>
+                <p>Track your legal matters and stay updated on progress.</p>
+            </div>
+        </div>
+        <button class="btn back-btn" onclick="goToSignup()">
+            Back to Signup
+        </button>
+    </div>
+
+    <script src="script/signup.js"></script>
+</body>
+</html>
