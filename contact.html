@@ -1,67 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us </title>
-    <link rel="stylesheet" href="styles/contact.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LawLink — Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles/contact.css">
 </head>
 <body>
-    <div class="navbar">
-        <div class="navbar-left">
-            <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1729865508/logo_smcgej.jpg" alt="LOGO" class="logo">
-        </div>
-        <div class="navbar-right">
-            <a href="main.html" class="a-element">Home</a>
-            <a href="profiles.html" class="a-element">Attorney</a>
-            <a href="contact.html" class="a-element">Contact</a>
-            <a href="about.html" class="a-element">About</a>
-            <button class="LOGIN"><a href="login.html">LOGIN</a></button>
-            <li class="dropdown">
-                <a href="Signup.html" class="signin-btn">SIGNIN</a>
-                <!-- <div class="dropdown-content">
-                    <a href="client.html">Client</a>
-                    <a href="attorneySignin.html">Lawyer</a>
-                </div> -->
-            </li>
-        </div>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-badge">L</div>
+      <span class="logo-name">Law<strong>Link</strong></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="profiles.html" class="nav-link">Attorneys</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+      <div class="nav-actions">
+        <a href="login.html" class="btn-ghost">Sign In</a>
+        <a href="Signup.html" class="btn-fill">Get Started</a>
+      </div>
     </div>
-    <div class="container">
-        <h1>Contact Us</h1>
-        <p style="text-align: center;">We’re here to assist you. Whether you have questions about our platform, need technical support, or want to collaborate, feel free to get in touch with us through the options below.</p>
+    <button class="hamburger" id="hamburger"><span></span><span></span></button>
+  </nav>
 
-        <div class="contact-section">
-            <h2>Get in Touch</h2>
-            <p><strong>Phone:</strong> <a href="tel:18005294357">1-800-LAW-HELP</a></p>
-            <p><strong>Email:</strong> <a href="mailto:info@lawportal.com">info@lawportal.com</a></p>
-            <p><strong>Support:</strong> <a href="mailto:support@lawportal.com">support@lawportal.com</a></p>
-            <p><strong>Office Address:</strong>Law Portal Inc., 456 Legal Heights, Madhapur, Hyderabad, Telangana, 500081</p>
-        </div>
+  <!-- Hero -->
+  <section class="page-hero">
+    <span class="tag-label">Get In Touch</span>
+    <h1>Let's <em>talk.</em></h1>
+    <p>Have a question, need support, or want to collaborate? We're here.</p>
+    <div class="hero-rule"></div>
+  </section>
 
-        <div class="contact-section">
-            <h2>Contact Form</h2>
-            <form action="/submit-contact" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <input type="tel" name="phone" placeholder="Your Phone" required>
-                <input type="text" name="subject" placeholder="Subject" required>
-                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+  <!-- Contact Content -->
+  <section class="contact-section">
+    <div class="contact-grid">
 
-        <div class="contact-section">
-            <h2>Follow Us</h2>
-            <div class="social-links">
-                <a href="#" target="_blank">LinkedIn</a>
-                <a href="#" target="_blank">Twitter</a>
-                <a href="#" target="_blank">Facebook</a>
+      <!-- Info -->
+      <div class="contact-info">
+        <span class="tag-label">Contact Information</span>
+        <h2>Reach us <em>directly.</em></h2>
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <span class="info-label">Phone</span>
+              <a href="tel:+911800110500" class="info-val">+91 1800-110-500</a>
             </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <span class="info-label">General Enquiry</span>
+              <a href="/cdn-cgi/l/email-protection#8fe6e1e9e0cfe3eaf7edfde6ebe8eaa1e6e1" class="info-val"><span class="__cf_email__" data-cfemail="96fff8f0f9d6faf3eef4e4fff2f1f3b8fff8">[email&#160;protected]</span></a>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-headset"></i></div>
+            <div>
+              <span class="info-label">Support</span>
+              <a href="/cdn-cgi/l/email-protection#493a3c3939263b3d09252c312b3b202d2e2c672027" class="info-val"><span class="__cf_email__" data-cfemail="bac9cfcacad5c8cefad6dfc2d8c8d3dedddf94d3d4">[email&#160;protected]</span></a>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <span class="info-label">Office</span>
+              <span class="info-val">456 Legal Heights, Madhapur,<br>Hyderabad, Telangana 500081</span>
+            </div>
+          </div>
         </div>
+        <div class="social-row">
+          <a href="#" class="soc-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="soc-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="soc-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="soc-btn"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
 
-        <div class="contact-section">
-            <h2>Frequently Asked Questions (FAQ)</h2>
-            <p>For common questions, visit our <a href="#">FAQ section</a>.</p>
-        </div>
+      <!-- Form -->
+      <div class="contact-form-panel">
+        <span class="tag-label">Send a Message</span>
+        <h2>We'll respond <em>within 24h.</em></h2>
+        <form class="contact-form" action="/submit-contact" method="POST">
+          <div class="form-row">
+            <div class="field"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
+            <div class="field"><label>Email Address</label><input type="email" name="email" placeholder="you@example.com" required></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>Phone</label><input type="tel" name="phone" placeholder="+91 00000 00000"></div>
+            <div class="field"><label>Subject</label><input type="text" name="subject" placeholder="How can we help?" required></div>
+          </div>
+          <div class="field full">
+            <label>Message</label>
+            <textarea name="message" rows="6" placeholder="Tell us more about your inquiry..." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message <i class="fas fa-arrow-right"></i></button>
+        </form>
+      </div>
     </div>
-</body>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-header">
+      <span class="tag-label">FAQ</span>
+      <h2>Common <em>questions.</em></h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>How do I find the right attorney?</h4>
+        <p>Use our search filters to find attorneys by specialization, location, and experience. Review profiles and book consultations directly.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Is my information secure?</h4>
+        <p>Yes. All communications are end-to-end encrypted and your data is stored on secure Google Cloud servers with strict access controls.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How are lawyers verified?</h4>
+        <p>All attorneys must provide their bar registration number and professional credentials, which are verified before their profile goes live.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Is there a fee to join?</h4>
+        <p>Signing up is free for clients. Visit our pricing page to learn about premium plans for attorneys.</p>
+      </div>
+    </div>
+  </section>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    window.addEven

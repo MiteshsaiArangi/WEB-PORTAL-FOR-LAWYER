@@ -1,58 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-    <link rel="stylesheet" href="styles/about.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LawLink — About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles/about.css">
 </head>
 <body>
-    <div class="navbar">
-        <div class="navbar-left">
-            <img src="https://res.cloudinary.com/dzeal21vu/image/upload/v1729865508/logo_smcgej.jpg" alt="LOGO" class="logo">
-        </div>
-        <div class="navbar-right">
-            <a href="main.html" class="a-element">Home</a>
-            <a href="profiles.html" class="a-element">Attorney</a>
-            <a href="contact.html" class="a-element">Contact</a>
-            <a href="about.html" class="a-element">About</a>
-            <button class="LOGIN"><a href="login.html">LOGIN</a></button>
-            <li class="dropdown">
-                <a href="Signup.html" class="signin-btn">SIGNIN</a>
-                <!-- <div class="dropdown-content">
-                    <a href="client.html">Client</a>
-                    <a href="attorneySignin.html">Lawyer</a>
-                </div> -->
-            </li>
-        </div>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-badge">L</div>
+      <span class="logo-name">Law<strong>Link</strong></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="profiles.html" class="nav-link">Attorneys</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="nav-actions">
+        <a href="login.html" class="btn-ghost">Sign In</a>
+        <a href="Signup.html" class="btn-fill">Get Started</a>
+      </div>
     </div>
-    <header>
-        <h1>About Us</h1>
-    </header>
+    <button class="hamburger" id="hamburger"><span></span><span></span></button>
+  </nav>
 
-    <main>
-        <section>
-            <h2>Welcome</h2>
-            <p>We provide resources and tools to support legal professionals. Our platform is tailored to meet the dynamic needs of lawyers, ensuring they stay ahead in their practice.</p>
-        </section>
+  <!-- Hero -->
+  <section class="page-hero">
+    <span class="tag-label">About Us</span>
+    <h1>Redefining <em>legal access.</em></h1>
+    <p>We believe quality legal help should be available to everyone — not just the privileged few.</p>
+    <div class="hero-rule"></div>
+  </section>
 
-        <section>
-            <h2>Our Services</h2>
-            <p>Explore features designed for legal excellence:</p>
-            <ul>
-                <li>Case management tools</li>
-                <li>Access to legal document templates</li>
-                <li>Community discussions and peer advice</li>
-                <li>Updates on legal trends and news</li>
-            </ul>
-        </section>
+  <!-- Mission -->
+  <section class="mission-section">
+    <div class="mission-grid">
+      <div class="mission-text">
+        <span class="tag-label">Our Mission</span>
+        <h2>Empowering people <em>through law.</em></h2>
+        <p>LawLink was founded with a singular vision: to make legal services accessible, transparent, and efficient for everyone. We connect clients with experienced attorneys through a secure and intuitive platform.</p>
+        <p>Our team of engineers, legal professionals, and designers work together to continuously improve the experience for both clients and practitioners.</p>
+      </div>
+      <div class="mission-visual">
+        <div class="visual-card vc1">
+          <div class="vc-icon"><i class="fas fa-balance-scale"></i></div>
+          <strong>Fair Access</strong>
+          <span>Legal help for all</span>
+        </div>
+        <div class="visual-card vc2">
+          <div class="vc-icon"><i class="fas fa-lock"></i></div>
+          <strong>Secure Platform</strong>
+          <span>Bank-grade encryption</span>
+        </div>
+        <div class="visual-card vc3">
+          <div class="vc-icon"><i class="fas fa-users"></i></div>
+          <strong>12K+ Clients</strong>
+          <span>Trust LawLink daily</span>
+        </div>
+        <div class="visual-bg-circle"></div>
+      </div>
+    </div>
+  </section>
 
-        <section>
-            <h2>Contact</h2>
-            <p>We value your feedback and inquiries. Reach out to us:</p>
-            <p>Email: <a href="mailto:support@lawyersportal.com">support@lawyersportal.com</a></p>
-            <p>Phone: +1-800-LAW-PORT</p>
-        </section>
-    </main>
+  <!-- Values -->
+  <section class="values-section">
+    <div class="section-header">
+      <span class="tag-label">Core Values</span>
+      <h2>What we <em>stand for.</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="vcard-num">01</div>
+        <i class="fas fa-balance-scale"></i>
+        <h3>Justice First</h3>
+        <p>Every decision we make is guided by fair and equal access to legal representation.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="vcard-num">02</div>
+        <i class="fas fa-lock"></i>
+        <h3>Privacy & Security</h3>
+        <p>Your data is encrypted and protected with bank-grade security on Google Cloud.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="vcard-num">03</div>
+        <i class="fas fa-handshake"></i>
+        <h3>Transparency</h3>
+        <p>No hidden fees. Honest communication between attorneys and clients at every step.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="vcard-num">04</div>
+        <i class="fas fa-bolt"></i>
+        <h3>Innovation</h3>
+        <p>We continuously improve with the latest technology to make legal services more efficient.</p>
+      </div>
+    </div>
+  </section>
 
-</body>
+  <!-- Services -->
+  <section class="services-section">
+    <div class="services-grid">
+      <div class="services-header">
+        <span class="tag-label">Our Services</span>
+        <h2>Tools for <em>legal excellence.</em></h2>
+      </div>
+      <div class="services-list">
+        <div class="svc-item reveal">
+          <div class="svc-label">Case Management</div>
+          <p>Track, organize, and manage all your legal cases from a single intuitive dashboard.</p>
+        </div>
+        <div class="svc-item reveal">
+          <div class="svc-label">Document Templates</div>
+          <p>Access hundreds of professionally crafted legal document templates for instant use.</p>
+        </div>
+        <div class="svc-item reveal">
+          <div class="svc-label">Peer Community</div>
+          <p>Join discussions and share expertise with a network of legal professionals.</p>
+        </div>
+        <div class="svc-item reveal">
+          <div class="svc-label">Legal News</div>
+          <p>Stay ahead with curated legal news, case law updates, and regulatory changes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to <em>get started?</em></h2>
+    <p>Join thousands of clients and attorneys who trust LawLink for their legal needs.</p>
+    <div class="cta-btns">
+      <a href="Signup.html" class="btn-fill btn-lg">Create Account →</a>
+      <a href="contact.html" class="btn-outline-light">Contact Us</a>
+    </div>
+    <div class="cta-contact">
+      <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="493a3c3939263b3d09252c312b3b202d2e2c672027">[email&#160;protected]</a></span>
+      <span>+91 1800-110-500</span>
+    </div>
+  </section>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
+    });
+    const obs = new Intersectio
