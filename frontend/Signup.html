@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LawLink — Sign Up</title>
+  <title>CaseFlow — Sign Up</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/signup.css">
 </head>
@@ -17,8 +17,8 @@
     <div id="signup-selection" class="page active">
       <div class="sel-header">
         <a href="index.html" class="logo">
-          <div class="logo-badge">L</div>
-          <span class="logo-name">Law<strong>Link</strong></span>
+          <div class="logo-badge">C</div>
+          <span class="logo-name">Case<strong>Flow</strong></span>
         </a>
         <h1>Create your account</h1>
         <p>Choose the account type that fits you.</p>
@@ -84,6 +84,14 @@
         </div>
         <div class="field full"><label>Office Address</label><textarea id="lawyer-address" placeholder="Enter your office address" rows="2"></textarea></div>
         <div class="field full"><label>Professional Bio</label><textarea id="lawyer-bio" placeholder="Brief overview of your practice and expertise" rows="3"></textarea></div>
+        <div class="field full">
+          <label>Profile Photo</label>
+          <div class="photo-upload" id="photo-upload" onclick="document.getElementById('lawyer-photo').click()">
+            <div class="photo-preview" id="photo-preview"><i class="fas fa-camera"></i></div>
+            <input type="file" id="lawyer-photo" accept="image/*" style="display:none" onchange="previewPhoto(this)">
+            <div class="photo-hint">Click to upload a photo<br><small>JPG, PNG — max 2MB</small></div>
+          </div>
+        </div>
         <div class="form-submit"><button type="submit" class="submit-btn">Create Lawyer Account →</button></div>
       </form>
     </div>
@@ -94,7 +102,7 @@
         <button class="icon-btn" onclick="showPage('signup-selection')">←</button>
         <div>
           <h1>Client registration</h1>
-          <p>Join thousands of clients on LawLink</p>
+          <p>Join thousands of clients on CaseFlow</p>
         </div>
       </div>
       <form id="user-form" class="signup-form">
@@ -113,7 +121,7 @@
     <div id="lawyers-page" class="page success-page" style="display:none;">
       <div class="success-circle">✓</div>
       <h2>You're all set!</h2>
-      <p>Your professional profile has been created on LawLink.</p>
+      <p>Your professional profile has been created on CaseFlow.</p>
       <a href="profiles.html" class="submit-btn" style="display:inline-block;text-decoration:none;max-width:280px;">Browse Attorneys →</a>
     </div>
 
@@ -121,11 +129,12 @@
     <div id="home-page" class="page success-page" style="display:none;">
       <div class="success-circle">✓</div>
       <h2>Welcome aboard!</h2>
-      <p>Your account is ready. Start exploring legal services on LawLink.</p>
+      <p>Your account is ready. Start exploring legal services on CaseFlow.</p>
       <a href="profiles.html" class="submit-btn" style="display:inline-block;text-decoration:none;max-width:280px;">Find an Attorney →</a>
     </div>
   </div>
 
+  <script src="script/api.js"></script>
   <script src="script/signup.js"></script>
 </body>
 </html>

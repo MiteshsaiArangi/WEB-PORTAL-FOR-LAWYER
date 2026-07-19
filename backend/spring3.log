@@ -1,0 +1,23 @@
+[ERROR] COMPILATION ERROR : 
+[ERROR] /E:/lawlink/backend/src/test/java/com/lawlink/backend/BackendApplicationTests.java:[3,29] package org.junit.jupiter.api does not exist
+[ERROR] /E:/lawlink/backend/src/test/java/com/lawlink/backend/BackendApplicationTests.java:[4,45] package org.springframework.boot.test.context does not exist
+[ERROR] /E:/lawlink/backend/src/test/java/com/lawlink/backend/BackendApplicationTests.java:[6,2] cannot find symbol
+  symbol: class SpringBootTest
+[ERROR] /E:/lawlink/backend/src/test/java/com/lawlink/backend/BackendApplicationTests.java:[9,10] cannot find symbol
+  symbol:   class Test
+  location: class com.lawlink.backend.BackendApplicationTests
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.1:testCompile (default-testCompile) on project backend: Compilation failure: Compilation failure: 
+[ERROR] /E:/lawlink/backend/src/test/java/com/lawlink/backend/BackendApplicationTests.java:[3,29] package org.junit.jupiter.api does not exist
+[ERROR] /E:/lawlink/backend/src/test/java/com/lawlink/backend/BackendApplicationTests.java:[4,45] package org.springframework.boot.test.context does not exist
+[ERROR] /E:/lawlink/backend/src/test/java/com/lawlink/backend/BackendApplicationTests.java:[6,2] cannot find symbol
+[ERROR]   symbol: class SpringBootTest
+[ERROR] /E:/lawlink/backend/src/test/java/com/lawlink/backend/BackendApplicationTests.java:[9,10] cannot find symbol
+[ERROR]   symbol:   class Test
+[ERROR]   location: class com.lawlink.backend.BackendApplicationTests
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

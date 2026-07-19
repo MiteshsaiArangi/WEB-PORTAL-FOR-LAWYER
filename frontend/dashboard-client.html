@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaseFlow — Client Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="logo on-dark">
+        <div class="logo-badge">C</div>
+        <span class="logo-name">Case<strong>Flow</strong></span>
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" onclick="showSection('overview')">
+        <i class="fas fa-th-large"></i><span>Overview</span>
+      </button>
+      <button class="nav-item" onclick="showSection('attorneys')">
+        <i class="fas fa-user-tie"></i><span>Find Attorneys</span>
+      </button>
+      <button class="nav-item" onclick="showSection('appointments')">
+        <i class="fas fa-calendar-alt"></i><span>Appointments</span>
+        <span class="nav-badge" id="apt-badge"></span>
+      </button>
+      <button class="nav-item" onclick="showSection('cases')">
+        <i class="fas fa-folder-open"></i><span>My Cases</span>
+      </button>
+      <button class="nav-item" onclick="showSection('messages')">
+        <i class="fas fa-envelope"></i><span>Messages</span>
+        <span class="nav-badge" id="msg-badge"></span>
+      </button>
+      <button class="nav-item" onclick="showSection('profile')">
+        <i class="fas fa-user"></i><span>Profile</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i><span>Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main" id="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="topbar-left">
+        <h2 id="page-title">Overview</h2>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-user" onclick="showSection('profile')">
+          <div class="user-avatar" id="user-avatar">C</div>
+          <span id="user-name">Client</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Overview -->
+    <section class="section active" id="sec-overview">
+      <div class="welcome-banner">
+        <div>
+          <h1>Good day, <span id="welcome-name">there</span>! 👋</h1>
+          <p>Here's a summary of your legal activity on CaseFlow.</p>
+        </div>
+        <a href="#" onclick="showSection('attorneys')" class="btn-fill">Find an Attorney →</a>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-calendar-check"></i></div><div class="stat-info"><span class="stat-num" id="stat-appointments">—</span><span class="stat-label">Total Appointments</span></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-clock"></i></div><div class="stat-info"><span class="stat-num" id="stat-pending">—</span><span class="stat-label">Pending</span></div></div>
+        <div class="stat-card"><div class="stat-icon green"><i class="fas fa-folder-open"></i></div><div class="stat-info"><span class="stat-num" id="stat-cases">—</span><span class="stat-label">Active Cases</span></div></div>
+        <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-envelope"></i></div><div class="stat-info"><span class="stat-num" id="stat-messages">—</span><span class="stat-label">Unread Messages</span></div></div>
+      </div>
+      <div class="overview-grid">
+        <div class="card">
+          <div class="card-header"><h3>Recent Appointments</h3><button onclick="showSection('appointments')" class="card-link">View all →</button></div>
+          <div id="recent-appointments"><div class="empty-state"><i class="fas fa-calendar-alt"></i><p>No appointments yet</p></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>Active Cases</h3><button onclick="showSection('cases')" class="card-link">View all →</button></div>
+          <div id="recent-cases"><div class="empty-state"><i class="fas fa-folder-open"></i><p>No active cases</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Find Attorneys -->
+    <section class="section" id="sec-attorneys">
+      <div class="section-top">
+        <h2>Find an Attorney</h2>
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" id="attorney-search" placeholder="Search by name or specialization..." oninput="filterAttorneys()">
+          <select id="spec-filter" onchange="filterAttorneys()">
+            <option value="">All Specializations</option>
+            <option value="criminal">Criminal Law</option>
+            <option value="civil">Civil Law</option>
+            <option value="corporate">Corporate Law</option>
+            <option value="family">Family Law</option>
+            <option value="property">Property Law</option>
+            <option value="tax">Tax Law</option>
+          </select>
+        </div>
+      </div>
+      <div class="attorneys-grid" id="attorneys-grid">
+        <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading attorneys...</div>
+      </div>
+    </section>
+
+    <!-- Appointments -->
+    <section class="section" id="sec-appointments">
+      <div class="section-top">
+        <h2>My Appointments</h2>
+        <button class="btn-fill" onclick="openBookingModal()"><i class="fas fa-plus"></i> Book Appointment</button>
+      </div>
+      <div class="filter-tabs">
+        <button class="ftab active" onclick="filterApts('ALL', this)">All</button>
+        <button class="ftab" onclick="filterApts('PENDING', this)">Pending</button>
+        <button class="ftab" onclick="filterApts('CONFIRMED', this)">Confirmed</button>
+        <button class="ftab" onclick="filterApts('COMPLETED', this)">Completed</button>
+        <button class="ftab" onclick="filterApts('CANCELLED', this)">Cancelled</button>
+      </div>
+      <div id="appointments-list"><div class="empty-state"><i class="fas fa-calendar-alt"></i><p>No appointments found</p></div></div>
+    </section>
+
+    <!-- Cases -->
+    <section class="section" id="sec-cases">
+      <div class="section-top"><h2>My Cases</h2></div>
+      <div class="filter-tabs">
+        <button class="ftab active" onclick="filterCases('ALL', this)">All</button>
+        <button class="ftab" onclick="filterCases('ACTIVE', this)">Active</button>
+        <button class="ftab" onclick="filterCases('PENDING', this)">Pending</button>
+        <button class="ftab" onclick="filterCases('CLOSED', this)">Closed</button>
+      </div>
+      <div id="cases-list"><div class="empty-state"><i class="fas fa-folder-open"></i><p>No cases found</p></div></div>
+    </section>
+
+    <!-- Messages -->
+    <section class="section" id="sec-messages">
+      <div class="section-top">
+        <h2>Messages</h2>
+        <button class="btn-fill" onclick="openMessageModal()"><i class="fas fa-pen"></i> New Message</button>
+      </div>
+      <div class="messages-list" id="messages-list"><div class="empty-state"><i class="fas fa-envelope"></i><p>No messages yet</p></div></div>
+    </section>
+
+    <!-- Profile -->
+    <section class="section" id="sec-profile">
+      <div class="profile-wrap">
+        <div class="profile-card">
+          <div class="profile-avatar" id="profile-avatar-big">C</div>
+          <h2 id="profile-name">—</h2>
+          <span class="profile-role-tag">Client</span>
+        </div>
+        <div class="profile-form card">
+          <h3>Personal Information</h3>
+          <form id="profile-form">
+            <div class="form-row">
+              <div class="field"><label>Full Name</label><input type="text" id="pf-name" placeholder="Your full name"></div>
+              <div class="field"><label>Email</label><input type="email" id="pf-email" placeholder="Email" disabled></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Phone</label><input type="tel" id="pf-phone" placeholder="+91 00000 00000"></div>
+              <div class="field"><label>Location</label><input type="text" id="pf-location" placeholder="City, State"></div>
+            </div>
+            <button type="submit" class="btn-fill" style="margin-top:8px;">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Book Appointment Modal -->
+  <div class="modal-overlay" id="booking-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Book Appointment</h3>
+        <button onclick="closeModal('booking-modal')"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="booking-form">
+        <div class="field"><label>Lawyer Name *</label><input type="text" id="bk-lawyer-name" placeholder="Attorney name" required></div>
+        <div class="field"><label>Lawyer ID *</label><input type="text" id="bk-lawyer-id" placeholder="Lawyer ID" required></div>
+        <div class="form-row">
+          <div class="field"><label>Date *</label><input type="date" id="bk-date" required></div>
+          <div class="field">
+            <label>Time Slot *</label>
+            <select id="bk-slot" required>
+              <option value="">Select time</option>
+              <option>09:00 AM</option><option>10:00 AM</option>
+              <option>11:00 AM</option><option>12:00 PM</option>
+              <option>02:00 PM</option><option>03:00 PM</option>
+              <option>04:00 PM</option><option>05:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>Case Type</label><input type="text" id="bk-case-type" placeholder="e.g. Criminal, Family, Property"></div>
+        <div class="field"><label>Description</label><textarea id="bk-desc" rows="3" placeholder="Briefly describe your legal matter..."></textarea></div>
+        <div class="modal-actions">
+          <button type="button" onclick="closeModal('booking-modal')" class="btn-ghost">Cancel</button>
+          <button type="submit" class="btn-fill">Confirm Booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- New Message Modal -->
+  <div class="modal-overlay" id="message-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>New Message</h3>
+        <button onclick="closeModal('message-modal')"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="message-form">
+        <div class="field"><label>Recipient ID *</label><input type="text" id="msg-receiver" placeholder="Lawyer or user ID" required></div>
+        <div class="field"><label>Recipient Name *</label><input type="text" id="msg-receiver-name" placeholder="Recipient name" required></div>
+        <div class="field"><label>Message *</label><textarea id="msg-content" rows="4" placeholder="Type your message..." required></textarea></div>
+        <div class="modal-actions">
+          <button type="button" onclick="closeModal('message-modal')" class="btn-ghost">Cancel</button>
+          <button type="submit" class="btn-fill">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script/api.js"></script>
+  <script src="script/dashboard.js"></script>
+</body>
+</html>

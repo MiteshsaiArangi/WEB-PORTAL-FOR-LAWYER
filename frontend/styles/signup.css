@@ -111,6 +111,25 @@ body { font-family: var(--font-body); background: var(--paper-2); color: var(--i
 }
 
 .form-submit { margin-top: 36px; text-align: center; }
+
+/* Photo Upload */
+.photo-upload {
+  display: flex; align-items: center; gap: 18px;
+  border: 1.5px dashed var(--rule); border-radius: 12px;
+  padding: 16px 20px; cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+}
+.photo-upload:hover { border-color: var(--ink); background: rgba(26,26,26,0.02); }
+.photo-preview {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--paper-2); border: 1.5px solid var(--rule);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; flex-shrink: 0; transition: border-color 0.25s;
+}
+.photo-preview img { width: 100%; height: 100%; object-fit: cover; }
+.photo-preview i { font-size: 28px; color: var(--ink-faint); }
+.photo-hint { font-size: 13px; color: var(--ink-light); line-height: 1.5; }
+.photo-hint small { color: var(--ink-faint); }
 .submit-btn {
   display: inline-block; padding: 16px 44px;
   background: var(--ink); color: var(--white); border: none;

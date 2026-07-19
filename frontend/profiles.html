@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaseFlow — Attorneys</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/profile.css">
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-badge">C</div>
+      <span class="logo-name">Case<strong>Flow</strong></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="profiles.html" class="nav-link active">Attorneys</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="nav-actions">
+        <a href="login.html" class="btn-ghost">Sign In</a>
+        <a href="Signup.html" class="btn-fill">Get Started</a>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span></button>
+  </nav>
+
+  <section class="page-hero">
+    <span class="tag-label">Our Team</span>
+    <h1>Meet the <em>attorneys.</em></h1>
+    <p>Verified legal professionals across every area of practice. Find your perfect match.</p>
+  </section>
+
+  <section class="profiles-section" id="profile-grid">
+    <div class="filter-bar">
+      <span class="filter-label">All Specializations</span>
+      <div class="profile-count">Loading...</div>
+    </div>
+    <div class="profiles-grid">
+      <div class="loading" style="text-align:center;padding:60px;color:#888;">
+        <i class="fas fa-spinner fa-spin"></i> Loading attorneys...
+      </div>
+    </div>
+  </section>
+
+  <div class="profile-detail" id="profile-detail" style="display:none;">
+    <div class="detail-wrap">
+      <button onclick="backToGrid()" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Attorneys
+      </button>
+      <div class="detail-grid">
+        <div class="detail-left">
+          <div class="detail-img-wrap"><img id="pimg" src="" alt=""></div>
+          <div class="detail-actions">
+            <button class="btn-fill" onclick="openBookModal()"><i class="fas fa-calendar-alt"></i> Book Appointment</button>
+            <button class="btn-ghost" onclick="openMsgModal()"><i class="fas fa-envelope"></i> Send Message</button>
+          </div>
+        </div>
+        <div class="detail-right">
+          <span class="detail-tag" id="pposition"></span>
+          <h1 id="pname"></h1>
+          <div class="detail-rule"></div>
+          <p id="pabout"></p>
+          <div class="detail-section">
+            <h4><i class="fas fa-graduation-cap"></i> Education</h4>
+            <p id="peducation"></p>
+          </div>
+          <div class="detail-section">
+            <h4><i class="fas fa-star"></i> Key Skills</h4>
+            <ul id="pskills"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer" id="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo on-dark">
+          <div class="logo-badge">C</div>
+          <span class="logo-name">Case<strong>Flow</strong></span>
+        </a>
+        <p>Transparent, efficient legal services for everyone.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="fcol"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="#">Services</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Careers</a></li></ul></div>
+        <div class="fcol"><h4>Support</h4><ul><li><a href="#">FAQ</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Legal Policies</a></li><li><a href="#">Help Center</a></li></ul></div>
+        <div class="fcol"><h4>Platform</h4><ul><li><a href="profiles.html">Find Lawyers</a></li><li><a href="#">Pricing</a></li><li><a href="#">Request Demo</a></li><li><a href="#">Webinars</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 CaseFlow. All rights reserved.</p>
+      <p>Designed with care and purpose.</p>
+    </div>
+  </footer>
+
+  <!-- Book Appointment Modal -->
+  <div class="modal-overlay" id="book-modal" style="display:none;">
+    <div class="modal" style="max-width:480px;margin:auto;background:#fff;border-radius:12px;padding:32px;position:relative;">
+      <button onclick="closeBookModal()" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:1.3rem;cursor:pointer;">&times;</button>
+      <h3 style="margin-bottom:4px;">Book Appointment</h3>
+      <p id="book-lawyer-label" style="color:#666;margin-bottom:20px;font-size:0.95rem;"></p>
+      <form id="book-form" onsubmit="submitBooking(event)">
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-weight:500;margin-bottom:4px;">Date *</label>
+          <input type="date" id="bk-date" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-weight:500;margin-bottom:4px;">Time Slot *</label>
+          <select id="bk-slot" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+            <option value="">Select time</option>
+            <option>09:00 AM</option><option>10:00 AM</option>
+            <option>11:00 AM</option><option>12:00 PM</option>
+            <option>02:00 PM</option><option>03:00 PM</option>
+            <option>04:00 PM</option><option>05:00 PM</option>
+          </select>
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-weight:500;margin-bottom:4px;">Case Type</label>
+          <input type="text" id="bk-type" placeholder="e.g. Criminal, Family, Corporate" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;">
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-weight:500;margin-bottom:4px;">Description</label>
+          <textarea id="bk-desc" rows="3" placeholder="Briefly describe your legal matter..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;resize:vertical;"></textarea>
+        </div>
+        <button type="submit" class="submit-btn" style="width:100%;">Confirm Booking</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Send Message Modal -->
+  <div class="modal-overlay" id="msg-modal" style="display:none;">
+    <div class="modal" style="max-width:480px;margin:auto;background:#fff;border-radius:12px;padding:32px;position:relative;">
+      <button onclick="closeMsgModal()" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:1.3rem;cursor:pointer;">&times;</button>
+      <h3 style="margin-bottom:4px;">Send Message</h3>
+      <p id="msg-lawyer-label" style="color:#666;margin-bottom:20px;font-size:0.95rem;"></p>
+      <form id="msg-form" onsubmit="submitMessage(event)">
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-weight:500;margin-bottom:4px;">Your Message *</label>
+          <textarea id="msg-content" rows="5" placeholder="Type your message to this attorney..." required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;resize:vertical;"></textarea>
+        </div>
+        <button type="submit" class="submit-btn" style="width:100%;">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script/api.js"></script>
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
+    });
+    if (typeof updateNavAuth === 'function') updateNavAuth();
+
+    let allLawyersData = [];
+    let currentProfile = null;
+
+    async function loadLawyers() {
+      try {
+        allLawyersData = await apiFetch('/api/public/lawyers');
+        renderGrid(allLawyersData);
+      } catch (e) {
+        console.error('Failed to load lawyers:', e);
+        document.querySelector('.profiles-grid').innerHTML = '<div class="empty-state"><p>Unable to load attorneys. Make sure the backend is running.</p></div>';
+      }
+    }
+
+    function renderGrid(lawyers) {
+      const grid = document.querySelector('.profiles-grid');
+      document.querySelector('.profile-count').textContent = lawyers.length + ' Attorneys';
+      if (!lawyers || lawyers.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><p>No attorneys found</p></div>';
+        return;
+      }
+      grid.innerHTML = lawyers.map(l => `
+        <div class="profile-card" onclick="showProfile('${l.id}')">
+          <div class="card-img">
+            <img src="${l.profileImage || 'https://res.cloudinary.com/dzeal21vu/image/upload/v1733577417/concerned-mature-indian-businessman-at-office-desk-with-laptop-computer_fyr0jm.jpg'}" alt="${l.name}">
+            <div class="card-overlay"><span>View Profile &rarr;</span></div>
+          </div>
+          <div class="card-body"><div class="card-tag">${l.specialization}</div><h3>${l.name}</h3><p>${l.experience} yrs &middot; ${l.firm || ''}</p></div>
+        </div>
+      `).join('');
+    }
+
+    async function showProfile(id) {
+      try {
+        const p = await apiFetch('/api/public/lawyers/' + id);
+        if (!p) return;
+        currentProfile = p;
+        document.getElementById('pimg').src = p.profileImage || '';
+        document.getElementById('pname').textContent = p.name;
+        document.getElementById('pposition').textContent = p.specialization;
+        document.getElementById('pabout').textContent = p.bio || '';
+        document.getElementById('peducation').textContent = p.education || '';
+        document.getElementById('pskills').innerHTML = (p.skills || []).map(s => '<li><i class="fas fa-check"></i> ' + s + '</li>').join('');
+        document.getElementById('profile-grid').style.display = 'none';
+        document.getElementById('profile-detail').style.display = 'block';
+        document.getElementById('site-footer').style.display = 'none';
+        window.scrollTo(0, 0);
+      } catch (e) { console.error('Profile load error:', e); }
+    }
+
+    function backToGrid() {
+      document.getElementById('profile-detail').style.display = 'none';
+      document.getElementById('profile-grid').style.display = 'block';
+      document.getElementById('site-footer').style.display = 'block';
+    }
+
+    function requireClientAuth() {
+      const user = getUser();
+      if (!user) {
+        showToast('Please sign in to continue', 'error');
+        setTimeout(() => { window.location.href = 'login.html'; }, 1200);
+        return false;
+      }
+      if (user.role !== 'CLIENT') {
+        showToast('Only clients can book appointments', 'error');
+        return false;
+      }
+      return true;
+    }
+
+    function openBookModal() {
+      if (!requireClientAuth() || !currentProfile) return;
+      document.getElementById('book-lawyer-label').textContent = 'Attorney: ' + currentProfile.name + ' (' + currentProfile.specialization + ')';
+      document.getElementById('book-modal').style.display = 'flex';
+      document.getElementById('book-modal').style.alignItems = 'center';
+      document.getElementById('book-modal').style.justifyContent = 'center';
+      document.getElementById('book-modal').style.position = 'fixed';
+      document.getElementById('book-modal').style.inset = '0';
+      document.getElementById('book-modal').style.background = 'rgba(0,0,0,0.4)';
+      document.getElementById('book-modal').style.zIndex = '9999';
+    }
+
+    function closeBookModal() {
+      document.getElementById('book-modal').style.display = 'none';
+    }
+
+    async function submitBooking(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const orig = btn.textContent;
+      btn.textContent = 'Booking...';
+      btn.disabled = true;
+      try {
+        await apiFetch('/api/client/appointments', {
+          method: 'POST',
+          body: JSON.stringify({
+            lawyerId: String(currentProfile.id),
+            date: document.getElementById('bk-date').value,
+            timeSlot: document.getElementById('bk-slot').value,
+            caseType: document.getElementById('bk-type').value,
+            description: document.getElementById('bk-desc').value
+          })
+        });
+        showToast('Appointment booked successfully! The attorney will review your request.', 'success');
+        closeBookModal();
+        e.target.reset();
+      } catch (err) {
+        showToast(err.message || 'Booking failed', 'error');
+      } finally {
+        btn.textContent = orig;
+        btn.disabled = false;
+      }
+    }
+
+    function openMsgModal() {
+      if (!requireClientAuth() || !currentProfile) return;
+      document.getElementById('msg-lawyer-label').textContent = 'To: ' + currentProfile.name;
+      document.getElementById('msg-modal').style.display = 'flex';
+      document.getElementById('msg-modal').style.alignItems = 'center';
+      document.getElementById('msg-modal').style.justifyContent = 'center';
+      document.getElementById('msg-modal').style.position = 'fixed';
+      document.getElementById('msg-modal').style.inset = '0';
+      document.getElementById('msg-modal').style.background = 'rgba(0,0,0,0.4)';
+      document.getElementById('msg-modal').style.zIndex = '9999';
+    }
+
+    function closeMsgModal() {
+      document.getElementById('msg-modal').style.display = 'none';
+    }
+
+    async function submitMessage(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const orig = btn.textContent;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      try {
+        await apiFetch('/api/client/messages', {
+          method: 'POST',
+          body: JSON.stringify({
+            receiverId: String(currentProfile.userId || currentProfile.id),
+            receiverName: currentProfile.name,
+            content: document.getElementById('msg-content').value
+          })
+        });
+        showToast('Message sent!', 'success');
+        closeMsgModal();
+        e.target.reset();
+      } catch (err) {
+        showToast(err.message || 'Failed to send', 'error');
+      } finally {
+        btn.textContent = orig;
+        btn.disabled = false;
+      }
+    }
+
+    loadLawyers();
+  </script>
+</body>
+</html>
