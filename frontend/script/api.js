@@ -1,5 +1,4 @@
-const API_BASE = 'http://localhost:8080';
-
+const API_BASE = "https://web-portal-for-lawyer-1.onrender.com";
 function getToken() {
     return localStorage.getItem('authToken');
 }
