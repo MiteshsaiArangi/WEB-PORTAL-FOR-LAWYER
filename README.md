@@ -138,7 +138,12 @@ index.html
 using Live Server or any static web server.
 
 ---
+## 🔑 Admin Login
 
+**Email:** `admin@caseflow.com`  
+**Password:** `admin123`
+
+> These credentials are provided for demo purposes only.
 
 ---
 
