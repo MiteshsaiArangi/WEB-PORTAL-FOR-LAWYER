@@ -73,7 +73,9 @@ function updateNavAuth() {
     if (!navActions) return;
 
     if (user) {
-        const dashLink = user.role === 'LAWYER' ? 'dashboard-lawyer.html' : 'dashboard-client.html';
+        let dashLink = 'dashboard-client.html';
+        if (user.role === 'LAWYER') dashLink = 'dashboard-lawyer.html';
+        else if (user.role === 'ADMIN') dashLink = 'admin-dashboard.html';
         navActions.innerHTML = `
             <a href="${dashLink}" class="btn-ghost">Dashboard</a>
             <button onclick="logout()" class="btn-fill" style="cursor:pointer;border:none;">Sign Out</button>

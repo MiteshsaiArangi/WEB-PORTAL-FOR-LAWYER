@@ -29,6 +29,8 @@ public class SignupRequest {
     private Integer experience;
     private String firm;
     private String address;
+    private String city;
+    private String state;
     private String bio;
     private String education;
     private String[] skills;

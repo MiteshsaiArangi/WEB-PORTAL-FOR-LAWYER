@@ -109,6 +109,8 @@
             <option value="property">Property Law</option>
             <option value="tax">Tax Law</option>
           </select>
+          <select id="state-filter" onchange="filterAttorneys()" style="border:none;outline:none;font-family:var(--font-body);font-size:13px;color:var(--ink);background:transparent;cursor:pointer;width:130px;border-left:1.5px solid var(--rule);padding-left:12px;"><option value="">All States</option></select>
+          <select id="city-filter" onchange="filterAttorneys()" style="border:none;outline:none;font-family:var(--font-body);font-size:13px;color:var(--ink);background:transparent;cursor:pointer;width:130px;border-left:1.5px solid var(--rule);padding-left:12px;" disabled><option value="">All Cities</option></select>
         </div>
       </div>
       <div class="attorneys-grid" id="attorneys-grid">
@@ -232,6 +234,7 @@
     </div>
   </div>
 
+  <script src="script/locations.js"></script>
   <script src="script/api.js"></script>
   <script src="script/dashboard.js"></script>
 </body>

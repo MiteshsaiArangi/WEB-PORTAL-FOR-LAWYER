@@ -23,14 +23,20 @@ public class PublicController {
     @GetMapping("/lawyers")
     public ResponseEntity<List<LawyerProfile>> getLawyers(
             @RequestParam(required = false) String specialization,
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String state,
             @RequestParam(required = false) String search) {
         List<LawyerProfile> lawyers;
         if (search != null && !search.isBlank()) {
             lawyers = lawyerProfileRepository.searchByNameOrSpecialization(search);
         } else if (specialization != null && !specialization.isBlank()) {
-            lawyers = lawyerProfileRepository.findBySpecialization(specialization);
+            lawyers = lawyerProfileRepository.findByVerifiedAndSpecialization(true, specialization);
+        } else if (city != null && !city.isBlank()) {
+            lawyers = lawyerProfileRepository.findByVerifiedAndCity(true, city);
+        } else if (state != null && !state.isBlank()) {
+            lawyers = lawyerProfileRepository.findByVerifiedAndState(true, state);
         } else {
-            lawyers = lawyerProfileRepository.findByAvailableTrue();
+            lawyers = lawyerProfileRepository.findByVerifiedAndAvailableTrue(true);
         }
         return ResponseEntity.ok(lawyers);
     }

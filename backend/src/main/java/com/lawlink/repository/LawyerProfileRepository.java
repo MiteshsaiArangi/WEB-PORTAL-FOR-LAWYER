@@ -14,7 +14,12 @@ public interface LawyerProfileRepository extends MongoRepository<LawyerProfile, 
     Optional<LawyerProfile> findByBarNumber(String barNumber);
     List<LawyerProfile> findBySpecialization(String specialization);
     List<LawyerProfile> findByAvailableTrue();
+    List<LawyerProfile> findByVerificationStatus(String verificationStatus);
+    List<LawyerProfile> findByVerifiedAndAvailableTrue(boolean verified);
+    List<LawyerProfile> findByVerifiedAndSpecialization(boolean verified, String specialization);
+    List<LawyerProfile> findByVerifiedAndCity(boolean verified, String city);
+    List<LawyerProfile> findByVerifiedAndState(boolean verified, String state);
 
-    @Query("{ $or: [ { 'name': { $regex: ?0, $options: 'i' } }, { 'specialization': { $regex: ?0, $options: 'i' } } ] }")
+    @Query("{ $and: [ { 'verified': true }, { $or: [ { 'name': { $regex: ?0, $options: 'i' } }, { 'specialization': { $regex: ?0, $options: 'i' } } ] } ] }")
     List<LawyerProfile> searchByNameOrSpecialization(String keyword);
 }

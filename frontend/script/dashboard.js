@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
     loadCases();
     loadMessages();
     loadProfile();
+    setupCascadingDropdowns('state-filter', 'city-filter');
+    document.getElementById('state-filter').addEventListener('change', function() {
+        if (!this.value) document.getElementById('city-filter').disabled = true;
+    });
 });
 
 function showSection(name) {
@@ -99,6 +103,7 @@ function renderLawyers(lawyers) {
                 <span class="spec-tag">${escapeHtml(l.specialization)}</span>
                 <h3>${escapeHtml(l.name)}</h3>
                 <p>${l.experience} yrs · ${escapeHtml(l.firm || '')}</p>
+                ${(l.city || l.state) ? `<p style="font-size:12px;color:var(--ink-faint);margin-bottom:6px;"><i class="fas fa-map-marker-alt"></i> ${[l.city, l.state].filter(Boolean).join(', ')}</p>` : ''}
                 <p class="attorney-bio">${escapeHtml((l.bio || '').substring(0, 100))}...</p>
                 <div class="attorney-actions">
                     <button class="btn-fill" onclick="bookWithLawyer('${l.id}', '${escapeHtml(l.name)}')">Book Appointment</button>
@@ -111,9 +116,13 @@ function renderLawyers(lawyers) {
 function filterAttorneys() {
     const search = document.getElementById('attorney-search').value.toLowerCase();
     const spec = document.getElementById('spec-filter').value;
+    const state = document.getElementById('state-filter').value;
+    const city = document.getElementById('city-filter').value;
     let filtered = allLawyers;
-    if (search) filtered = filtered.filter(l => l.name.toLowerCase().includes(search) || l.specialization.toLowerCase().includes(search));
-    if (spec) filtered = filtered.filter(l => l.specialization.toLowerCase() === spec.toLowerCase());
+    if (search) filtered = filtered.filter(l => (l.name || '').toLowerCase().includes(search) || (l.specialization || '').toLowerCase().includes(search));
+    if (spec) filtered = filtered.filter(l => (l.specialization || '').toLowerCase() === spec.toLowerCase());
+    if (state) filtered = filtered.filter(l => (l.state || '') === state);
+    if (city) filtered = filtered.filter(l => (l.city || '') === city);
     renderLawyers(filtered);
 }
 

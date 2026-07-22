@@ -36,8 +36,22 @@
 
   <section class="profiles-section" id="profile-grid">
     <div class="filter-bar">
-      <span class="filter-label">All Specializations</span>
-      <div class="profile-count">Loading...</div>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;width:100%;">
+        <span class="filter-label" id="filter-label">All Attorneys</span>
+        <input type="text" id="profile-search" placeholder="Search by name or specialization..." oninput="filterProfiles()" style="flex:1;min-width:200px;padding:8px 14px;border:1.5px solid var(--rule);border-radius:8px;font-family:var(--font-body);font-size:13px;background:transparent;">
+        <select id="profile-spec" onchange="filterProfiles()" style="padding:8px 14px;border:1.5px solid var(--rule);border-radius:8px;font-family:var(--font-body);font-size:13px;background:transparent;cursor:pointer;">
+          <option value="">All Specializations</option>
+          <option value="criminal">Criminal Law</option>
+          <option value="civil">Civil Law</option>
+          <option value="corporate">Corporate Law</option>
+          <option value="family">Family Law</option>
+          <option value="property">Property Law</option>
+          <option value="tax">Tax Law</option>
+        </select>
+        <select id="profile-state" onchange="filterProfiles()" style="padding:8px 14px;border:1.5px solid var(--rule);border-radius:8px;font-family:var(--font-body);font-size:13px;background:transparent;cursor:pointer;width:160px;"><option value="">All States</option></select>
+        <select id="profile-city" onchange="filterProfiles()" style="padding:8px 14px;border:1.5px solid var(--rule);border-radius:8px;font-family:var(--font-body);font-size:13px;background:transparent;cursor:pointer;width:160px;" disabled><option value="">All Cities</option></select>
+        <div class="profile-count">Loading...</div>
+      </div>
     </div>
     <div class="profiles-grid">
       <div class="loading" style="text-align:center;padding:60px;color:#888;">
@@ -62,6 +76,7 @@
         <div class="detail-right">
           <span class="detail-tag" id="pposition"></span>
           <h1 id="pname"></h1>
+          <p style="font-size:13px;color:var(--ink-faint);margin-bottom:16px;" id="plocation"></p>
           <div class="detail-rule"></div>
           <p id="pabout"></p>
           <div class="detail-section">
@@ -154,6 +169,7 @@
     </div>
   </div>
 
+  <script src="script/locations.js"></script>
   <script src="script/api.js"></script>
   <script>
     window.addEventListener('scroll', () => {
@@ -191,7 +207,12 @@
             <img src="${l.profileImage || 'https://res.cloudinary.com/dzeal21vu/image/upload/v1733577417/concerned-mature-indian-businessman-at-office-desk-with-laptop-computer_fyr0jm.jpg'}" alt="${l.name}">
             <div class="card-overlay"><span>View Profile &rarr;</span></div>
           </div>
-          <div class="card-body"><div class="card-tag">${l.specialization}</div><h3>${l.name}</h3><p>${l.experience} yrs &middot; ${l.firm || ''}</p></div>
+          <div class="card-body">
+            <div class="card-tag">${l.specialization}</div>
+            <h3>${l.name}</h3>
+            <p>${l.experience} yrs &middot; ${l.firm || ''}</p>
+            ${(l.city || l.state) ? `<p style="font-size:11px;color:var(--ink-faint);margin-top:4px;"><i class="fas fa-map-marker-alt"></i> ${[l.city, l.state].filter(Boolean).join(', ')}</p>` : ''}
+          </div>
         </div>
       `).join('');
     }
@@ -204,6 +225,7 @@
         document.getElementById('pimg').src = p.profileImage || '';
         document.getElementById('pname').textContent = p.name;
         document.getElementById('pposition').textContent = p.specialization;
+        document.getElementById('plocation').textContent = [p.city, p.state].filter(Boolean).join(', ') || '';
         document.getElementById('pabout').textContent = p.bio || '';
         document.getElementById('peducation').textContent = p.education || '';
         document.getElementById('pskills').innerHTML = (p.skills || []).map(s => '<li><i class="fas fa-check"></i> ' + s + '</li>').join('');
@@ -319,6 +341,27 @@
         btn.disabled = false;
       }
     }
+
+    function filterProfiles() {
+      const search = document.getElementById('profile-search').value.toLowerCase();
+      const spec = document.getElementById('profile-spec').value;
+      const state = document.getElementById('profile-state').value;
+      const city = document.getElementById('profile-city').value;
+      let filtered = allLawyersData;
+      if (search) filtered = filtered.filter(l => (l.name || '').toLowerCase().includes(search) || (l.specialization || '').toLowerCase().includes(search));
+      if (spec) filtered = filtered.filter(l => (l.specialization || '').toLowerCase() === spec.toLowerCase());
+      if (state) filtered = filtered.filter(l => (l.state || '') === state);
+      if (city) filtered = filtered.filter(l => (l.city || '') === city);
+      renderGrid(filtered);
+    }
+
+    function onProfileStateChange() {
+      populateCityDropdown('profile-state', 'profile-city');
+      filterProfiles();
+    }
+    document.getElementById('profile-state').addEventListener('change', onProfileStateChange);
+    populateStateDropdown('profile-state');
+    populateCityDropdown('profile-state', 'profile-city');
 
     loadLawyers();
   </script>

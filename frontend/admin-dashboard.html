@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaseFlow — Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <style>
+    .status-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      font-size: 11px; font-weight: 600;
+    }
+    .status-PENDING { background: var(--orange-bg); color: var(--orange); }
+    .status-VERIFIED { background: var(--green-bg); color: var(--green); }
+    .status-REJECTED { background: var(--red-bg); color: var(--red); }
+    .lawyer-row {
+      background: var(--white); border: 1px solid var(--rule);
+      border-radius: var(--rad-sm); padding: 18px 22px;
+      display: flex; align-items: center; gap: 18px;
+      margin-bottom: 12px; transition: all 0.22s;
+    }
+    .lawyer-row:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+    .lawyer-row-info { flex: 1; }
+    .lawyer-row-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .lawyer-row-info p { font-size: 12px; color: var(--ink-faint); margin: 0; }
+    .lawyer-row-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .btn-approve {
+      padding: 8px 18px; border: none; border-radius: 8px;
+      background: var(--green); color: white;
+      font-family: var(--font-body); font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.22s;
+    }
+    .btn-approve:hover { opacity: 0.8; }
+    .btn-reject {
+      padding: 8px 18px; border: none; border-radius: 8px;
+      background: var(--red); color: white;
+      font-family: var(--font-body); font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.22s;
+    }
+    .btn-reject:hover { opacity: 0.8; }
+    .empty-state { text-align: center; padding: 48px 24px; color: var(--ink-faint); }
+    .empty-state i { font-size: 36px; margin-bottom: 12px; opacity: 0.4; }
+    .empty-state p { font-size: 14px; }
+  </style>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="logo on-dark">
+        <div class="logo-badge">C</div>
+        <span class="logo-name">Case<strong>Flow</strong></span>
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" onclick="showSection('overview')">
+        <i class="fas fa-th-large"></i><span>Overview</span>
+      </button>
+      <button class="nav-item" onclick="showSection('pending')">
+        <i class="fas fa-clock"></i><span>Pending Verifications</span>
+        <span class="nav-badge" id="pending-badge"></span>
+      </button>
+      <button class="nav-item" onclick="showSection('verified')">
+        <i class="fas fa-check-circle"></i><span>Verified Lawyers</span>
+      </button>
+      <button class="nav-item" onclick="showSection('rejected')">
+        <i class="fas fa-times-circle"></i><span>Rejected Lawyers</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i><span>Sign Out</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <header class="topbar">
+      <button class="menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="topbar-left">
+        <h2 id="page-title">Admin Overview</h2>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-user">
+          <div class="user-avatar" id="user-avatar">A</div>
+          <span id="user-name">Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="section active" id="sec-overview">
+      <div class="welcome-banner">
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p>Manage lawyer verifications on CaseFlow.</p>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-info"><span class="stat-num" id="stat-total-users">—</span><span class="stat-label">Total Users</span></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-user-tie"></i></div><div class="stat-info"><span class="stat-num" id="stat-total-lawyers">—</span><span class="stat-label">Total Lawyers</span></div></div>
+        <div class="stat-card"><div class="stat-icon green"><i class="fas fa-check-circle"></i></div><div class="stat-info"><span class="stat-num" id="stat-verified">—</span><span class="stat-label">Verified</span></div></div>
+        <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-clock"></i></div><div class="stat-info"><span class="stat-num" id="stat-pending">—</span><span class="stat-label">Pending</span></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="sec-pending">
+      <div class="section-top">
+        <h2>Pending Verifications</h2>
+      </div>
+      <div id="pending-list"><div class="empty-state"><i class="fas fa-clock"></i><p>No pending verifications</p></div></div>
+    </section>
+
+    <section class="section" id="sec-verified">
+      <div class="section-top">
+        <h2>Verified Lawyers</h2>
+      </div>
+      <div id="verified-list"><div class="empty-state"><i class="fas fa-check-circle"></i><p>No verified lawyers</p></div></div>
+    </section>
+
+    <section class="section" id="sec-rejected">
+      <div class="section-top">
+        <h2>Rejected Lawyers</h2>
+      </div>
+      <div id="rejected-list"><div class="empty-state"><i class="fas fa-times-circle"></i><p>No rejected lawyers</p></div></div>
+    </section>
+  </main>
+
+  <script src="script/api.js"></script>
+  <script src="script/admin.js"></script>
+</body>
+</html>

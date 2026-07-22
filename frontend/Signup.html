@@ -81,6 +81,8 @@
           </div>
           <div class="field"><label>Years of Experience *</label><input type="number" id="lawyer-experience" min="0" placeholder="e.g. 8" required></div>
           <div class="field"><label>Law Firm / Practice Name</label><input type="text" id="lawyer-firm" placeholder="Smith & Associates"></div>
+          <div class="field"><label>State *</label><select id="lawyer-state" required style="width:100%;padding:11px 14px;border:1.5px solid var(--rule);border-radius:8px;font-family:var(--font-body);font-size:14px;background:var(--white);"><option value="">Select State</option></select></div>
+          <div class="field"><label>City *</label><select id="lawyer-city" required style="width:100%;padding:11px 14px;border:1.5px solid var(--rule);border-radius:8px;font-family:var(--font-body);font-size:14px;background:var(--white);" disabled><option value="">Select City</option></select></div>
         </div>
         <div class="field full"><label>Office Address</label><textarea id="lawyer-address" placeholder="Enter your office address" rows="2"></textarea></div>
         <div class="field full"><label>Professional Bio</label><textarea id="lawyer-bio" placeholder="Brief overview of your practice and expertise" rows="3"></textarea></div>
@@ -134,6 +136,7 @@
     </div>
   </div>
 
+  <script src="script/locations.js"></script>
   <script src="script/api.js"></script>
   <script src="script/signup.js"></script>
 </body>

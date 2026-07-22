@@ -34,6 +34,8 @@ public class LawyerProfile {
     private int experience;
     private String firm;
     private String address;
+    private String city;
+    private String state;
     private String bio;
     private String education;
     private String profileImage;
@@ -41,6 +43,8 @@ public class LawyerProfile {
     private List<String> skills = new ArrayList<>();
 
     private boolean available = true;
+    private boolean verified = false;
+    private String verificationStatus = "PENDING";
     private double rating = 0.0;
     private int casesHandled = 0;
 

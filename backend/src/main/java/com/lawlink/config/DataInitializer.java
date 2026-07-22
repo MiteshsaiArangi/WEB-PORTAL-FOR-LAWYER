@@ -26,7 +26,9 @@ public class DataInitializer implements CommandLineRunner {
         if (userRepository.count() == 0) {
             seedLawyers();
         }
+        seedAdminIfNotExists();
         migrateOldEmails();
+        ensureSeededLawyersVerified();
     }
 
     private void migrateOldEmails() {
@@ -79,6 +81,8 @@ public class DataInitializer implements CommandLineRunner {
         };
 
         String[] locations = {"Delhi", "Mumbai", "Chennai", "Bengaluru", "New Delhi", "Kochi"};
+        String[] cities = {"Delhi", "Mumbai", "Chennai", "Bengaluru", "Delhi", "Kochi"};
+        String[] states = {"Delhi", "Maharashtra", "Tamil Nadu", "Karnataka", "Delhi", "Kerala"};
 
         for (int i = 0; i < lawyers.length; i++) {
             Object[] l = lawyers[i];
@@ -102,6 +106,8 @@ public class DataInitializer implements CommandLineRunner {
             profile.setSpecialization((String) l[4]);
             profile.setExperience((int) l[5]);
             profile.setFirm((String) l[6]);
+            profile.setCity(cities[i]);
+            profile.setState(states[i]);
             profile.setBio((String) l[7]);
             profile.setEducation((String) l[8]);
             profile.setSkills((List<String>) l[9]);
@@ -112,5 +118,29 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         log.info("Seeded 6 lawyer profiles successfully.");
+    }
+
+    private void seedAdminIfNotExists() {
+        if (userRepository.findByEmail("admin@caseflow.com").isPresent()) return;
+        User admin = new User();
+        admin.setName("Admin");
+        admin.setEmail("admin@caseflow.com");
+        admin.setPassword(passwordEncoder.encode("admin123"));
+        admin.setRole("ADMIN");
+        admin.setPhone("+91 00000 00000");
+        admin.setLocation("Admin");
+        userRepository.save(admin);
+        log.info("Seeded admin user (admin@caseflow.com / admin123)");
+    }
+
+    private void ensureSeededLawyersVerified() {
+        for (LawyerProfile profile : lawyerProfileRepository.findAll()) {
+            if (!profile.isVerified()) {
+                profile.setVerified(true);
+                profile.setVerificationStatus("VERIFIED");
+                lawyerProfileRepository.save(profile);
+            }
+        }
+        log.info("Ensured all seeded lawyers are verified.");
     }
 }

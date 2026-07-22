@@ -55,6 +55,7 @@ function previewPhoto(input) {
 
 document.addEventListener('DOMContentLoaded', function () {
     updateNavAuth();
+    setupCascadingDropdowns('lawyer-state', 'lawyer-city');
 
     const lawyerForm = document.getElementById('lawyer-form');
     if (lawyerForm) {
@@ -75,6 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 specialization: document.getElementById('lawyer-specialization').value,
                 experience: parseInt(document.getElementById('lawyer-experience').value) || 0,
                 firm: document.getElementById('lawyer-firm').value.trim(),
+                city: document.getElementById('lawyer-city').value.trim(),
+                state: document.getElementById('lawyer-state').value.trim(),
                 address: document.getElementById('lawyer-address').value.trim(),
                 bio: document.getElementById('lawyer-bio').value.trim(),
                 profileImage: selectedPhotoBase64
@@ -86,6 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!payload.password || payload.password.length < 6) errors.push('Password must be at least 6 characters');
             if (!payload.barNumber) errors.push('Bar license number is required');
             if (!payload.specialization) errors.push('Specialization is required');
+            if (!payload.city) errors.push('City is required');
+            if (!payload.state) errors.push('State is required');
             if (errors.length > 0) {
                 showToast(errors.join('\n'), 'error');
                 button.textContent = originalText;

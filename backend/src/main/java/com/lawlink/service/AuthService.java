@@ -50,9 +50,13 @@ public class AuthService {
             profile.setExperience(request.getExperience() != null ? request.getExperience() : 0);
             profile.setFirm(request.getFirm());
             profile.setAddress(request.getAddress());
+            profile.setCity(request.getCity());
+            profile.setState(request.getState());
             profile.setBio(request.getBio());
             profile.setEducation(request.getEducation());
             profile.setSkills(request.getSkills() != null ? java.util.List.of(request.getSkills()) : new ArrayList<>());
+            profile.setVerified(false);
+            profile.setVerificationStatus("PENDING");
             if (request.getProfileImage() != null) profile.setProfileImage(request.getProfileImage());
             lawyerProfileRepository.save(profile);
         }

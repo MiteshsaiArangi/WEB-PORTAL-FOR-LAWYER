@@ -34,7 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 setUser({ id: data.id, name: data.name, email: data.email, role: data.role });
                 showToast('Login successful!', 'success');
                 setTimeout(() => {
-                    window.location.href = data.role === 'LAWYER' ? 'dashboard-lawyer.html' : 'dashboard-client.html';
+                    if (data.role === 'LAWYER') window.location.href = 'dashboard-lawyer.html';
+                    else if (data.role === 'ADMIN') window.location.href = 'admin-dashboard.html';
+                    else window.location.href = 'dashboard-client.html';
                 }, 500);
             }
         } catch (err) {
@@ -70,7 +72,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 setUser({ id: data.id, name: data.name, email: data.email, role: data.role });
                 showToast('Login successful!', 'success');
                 setTimeout(() => {
-                    window.location.href = data.role === 'LAWYER' ? 'dashboard-lawyer.html' : 'dashboard-client.html';
+                    if (data.role === 'LAWYER') window.location.href = 'dashboard-lawyer.html';
+                    else if (data.role === 'ADMIN') window.location.href = 'admin-dashboard.html';
+                    else window.location.href = 'dashboard-client.html';
                 }, 500);
             }
         } catch (err) {
